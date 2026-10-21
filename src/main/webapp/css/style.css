@@ -1,0 +1,149 @@
+@charset "UTF-8";
+/* ==========================================================
+   Malin'Assur – feuille de style globale
+   Chargée sur TOUTES les pages (fond, couleurs, boutons...)
+   ========================================================== */
+
+:root {
+  --bordeaux:       #6b1e2e;
+  --bordeaux-dark:  #541723;
+  --sage:           #7d9577;
+  --sage-dark:      #4f6b4c;
+  --sage-light:     #dfe5d8;
+  --gold:           #b8923a;
+  --cream:          #f8f5ea;
+  --text:           #2f2a2b;
+  --muted:          #7a7468;
+  --error:          #a3202f;
+
+  --font-title: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-body:  'Inter', 'Segoe UI', Roboto, Arial, sans-serif;
+  --radius:     14px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body { height: 100%; margin: 0; }
+
+/* Fond commun à tout le site */
+body {
+  font-family: var(--font-body);
+  color: var(--text);
+  background: var(--cream) url('../img/background.jpg') center / cover no-repeat fixed;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--sage-dark); text-decoration: none; transition: color .2s; }
+a:hover { color: var(--bordeaux); }
+
+h1, h2, h3 { font-family: var(--font-title); color: var(--bordeaux); margin: 0; }
+
+/* ---------- Mise en page centrée (login, inscription...) ---------- */
+.center-page {
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 16px;
+}
+
+/* ---------- Carte ---------- */
+.card {
+  width: 100%;
+  max-width: 430px;
+  background: rgba(255, 255, 255, .72);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(184, 146, 58, .35);   /* fin liseré doré */
+  border-radius: var(--radius);
+  padding: 40px 38px 34px;
+  box-shadow: 0 18px 50px rgba(79, 107, 76, .18);
+}
+
+.card .logo { display: block; width: 210px; max-width: 70%; margin: 0 auto 20px; }
+
+.card h1 { text-align: center; font-size: 2rem; font-weight: 600; margin-top: 6px; }
+
+.card .subtitle {
+  text-align: center; color: var(--muted); font-size: .92rem;
+  margin: 6px 0 26px;
+}
+
+/* ---------- Formulaires ---------- */
+.field { margin-bottom: 18px; }
+
+.field label {
+  display: block; font-size: .8rem; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--sage-dark); margin-bottom: 6px;
+}
+
+.input-wrap { position: relative; }
+
+.field input {
+  width: 100%;
+  padding: 12px 14px;
+  font: inherit; color: var(--text);
+  background: rgba(255, 255, 255, .85);
+  border: 1px solid var(--sage-light);
+  border-radius: 10px;
+  outline: none;
+  transition: border-color .2s, box-shadow .2s;
+}
+.field input::placeholder { color: #aaa699; }
+.field input:focus {
+  border-color: var(--sage);
+  box-shadow: 0 0 0 3px rgba(125, 149, 119, .22);
+}
+.field.invalid input { border-color: var(--error); }
+.field .error-text { color: var(--error); font-size: .78rem; margin-top: 5px; display: none; }
+.field.invalid .error-text { display: block; }
+
+.toggle-pwd {
+  position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+  background: none; border: 0; cursor: pointer;
+  color: var(--sage-dark); font-size: .78rem; padding: 4px 6px;
+}
+.toggle-pwd:hover { color: var(--bordeaux); }
+
+.row-between {
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: .85rem; margin: -4px 0 22px;
+}
+.remember { display: flex; align-items: center; gap: 7px; color: var(--muted); cursor: pointer; }
+.remember input { accent-color: var(--bordeaux); }
+
+/* ---------- Boutons ---------- */
+.btn {
+  display: block; width: 100%;
+  padding: 13px 18px;
+  font: 600 .95rem var(--font-body); letter-spacing: .04em;
+  color: #fff; background: var(--bordeaux);
+  border: 0; border-radius: 10px; cursor: pointer;
+  transition: background .2s, transform .1s, box-shadow .2s;
+}
+.btn:hover  { background: var(--bordeaux-dark); box-shadow: 0 6px 16px rgba(107, 30, 46, .28); }
+.btn:active { transform: translateY(1px); }
+
+/* ---------- Messages ---------- */
+.alert {
+  padding: 11px 14px; border-radius: 10px; font-size: .88rem; margin-bottom: 18px;
+}
+.alert-error   { background: #f8e4e6; color: var(--error);     border: 1px solid #ecc3c8; }
+.alert-success { background: #e6eee2; color: var(--sage-dark); border: 1px solid #cddbc6; }
+
+/* ---------- Séparateur doré + pied de carte ---------- */
+.divider {
+  display: flex; align-items: center; gap: 12px; margin: 24px 0 18px;
+  color: var(--gold); font-size: .75rem;
+}
+.divider::before, .divider::after {
+  content: ""; flex: 1; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.card-footer { text-align: center; font-size: .9rem; color: var(--muted); }
+.card-footer a { font-weight: 600; }
+
+@media (max-width: 480px) {
+  .card { padding: 30px 22px 26px; }
+}
