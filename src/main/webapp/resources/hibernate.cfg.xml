@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<!--
+  ⚠️ Ce fichier est normalement celui de la personne 1 (Lead Tech).
+  S'il existe déjà dans le projet : ne remplace pas le sien, ajoute juste
+  les 5 lignes <mapping class="..."/> du module Contrats & Produits.
+-->
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/malinassur</property>
+        <property name="hibernate.connection.username">postgres</property>
+        <property name="hibernate.connection.password">postgres</property>
+
+        <!-- "validate" : Hibernate vérifie que les classes correspondent aux tables, sans rien modifier -->
+        <property name="hibernate.hbm2ddl.auto">validate</property>
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.format_sql">true</property>
+
+        <!-- ===== Module Contrats & Produits (personne 2) ===== -->
+        <mapping class="fr.malinassur.model.InsuranceType"/>
+        <mapping class="fr.malinassur.model.Coverage"/>
+        <mapping class="fr.malinassur.model.InsuranceTypeCoverage"/>
+        <mapping class="fr.malinassur.model.Contract"/>
+        <mapping class="fr.malinassur.model.ContractCoverage"/>
+    </session-factory>
+</hibernate-configuration>
