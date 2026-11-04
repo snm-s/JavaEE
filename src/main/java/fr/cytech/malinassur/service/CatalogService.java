@@ -1,11 +1,11 @@
-package fr.malinassur.service;
+package fr.cytech.malinassur.service;
 
 import java.math.BigDecimal;
 import java.util.List;
 
-import fr.malinassur.dao.CoverageDao;
-import fr.malinassur.dao.InsuranceTypeDao;
-import fr.malinassur.exception.BusinessException;
+import fr.cytech.malinassur.dao.CoverageDao;
+import fr.cytech.malinassur.dao.InsuranceTypeDao;
+import fr.cytech.malinassur.exception.BusinessException;
 import fr.malinassur.model.Coverage;
 import fr.malinassur.model.InsuranceType;
 import fr.malinassur.model.InsuranceTypeCoverage;

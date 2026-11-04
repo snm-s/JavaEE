@@ -1,4 +1,4 @@
-package fr.malinassur.exception;
+package fr.cytech.malinassur.exception;
 
 /**
  * Erreur "métier" : une règle n'est pas respectée (ex : résilier un contrat déjà résilié).

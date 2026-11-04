@@ -1,4 +1,4 @@
-package fr.malinassur.service;
+package fr.cytech.malinassur.service;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -8,9 +8,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import fr.malinassur.dao.ContractDao;
-import fr.malinassur.dao.InsuranceTypeDao;
-import fr.malinassur.exception.BusinessException;
+import fr.cytech.malinassur.dao.ContractDao;
+import fr.cytech.malinassur.dao.InsuranceTypeDao;
+import fr.cytech.malinassur.exception.BusinessException;
 import fr.malinassur.model.Contract;
 import fr.malinassur.model.ContractStatus;
 import fr.malinassur.model.InsuranceType;

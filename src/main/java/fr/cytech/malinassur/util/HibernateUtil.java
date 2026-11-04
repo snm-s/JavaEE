@@ -1,4 +1,4 @@
-package fr.malinassur.util;
+package fr.cytech.malinassur.util;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;

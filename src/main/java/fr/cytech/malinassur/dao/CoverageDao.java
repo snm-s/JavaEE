@@ -1,4 +1,4 @@
-package fr.malinassur.dao;
+package fr.cytech.malinassur.dao;
 
 import java.util.List;
 
