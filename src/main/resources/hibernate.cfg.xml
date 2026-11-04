@@ -4,26 +4,28 @@
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-        <!-- Paramètres JDBC (exemple avec PostgreSQL) -->
         <property name="connection.driver_class">org.postgresql.Driver</property>
         <property name="connection.url">jdbc:postgresql://localhost:5432/assurance_db</property>
         <property name="connection.username">postgres</property>
         <property name="connection.password">postgres</property>
 
-        <!-- Dialecte SQL -->
         <property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property>
-
-        <!-- Affichage des requêtes dans la console pour vérifier -->
         <property name="show_sql">true</property>
         <property name="format_sql">true</property>
-
-        <!-- Création / Mise à jour automatique des tables par Hibernate pour le dev -->
         <property name="hbm2ddl.auto">update</property>
 
-        <!-- Enregistrement des entités gérées -->
-        <mapping class="fr.cytech.assurance.model.AppUser"/>
-        <mapping class="fr.cytech.assurance.model.Contract"/>
-        <mapping class="fr.cytech.assurance.model.Claim"/>
-        <mapping class="fr.cytech.assurance.model.SupportingDocument"/>
+        <!-- Socle & Utilisateurs -->
+        <mapping class="fr.cytech.malinassur.model.AppUser"/>
+
+        <!-- Module 1 : Types & Contrats -->
+        <mapping class="fr.cytech.malinassur.model.InsuranceType"/>
+        <mapping class="fr.cytech.malinassur.model.Coverage"/>
+        <mapping class="fr.cytech.malinassur.model.InsuranceTypeCoverage"/>
+        <mapping class="fr.cytech.malinassur.model.Contract"/>
+        <mapping class="fr.cytech.malinassur.model.ContractCoverage"/>
+
+        <!-- Module 2 : Sinistres -->
+        <mapping class="fr.cytech.malinassur.model.Claim"/>
+        <mapping class="fr.cytech.malinassur.model.SupportingDocument"/>
     </session-factory>
 </hibernate-configuration>

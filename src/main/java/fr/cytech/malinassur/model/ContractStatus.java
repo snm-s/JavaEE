@@ -1,4 +1,4 @@
-package fr.malinassur.model;
+package fr.cytech.malinassur.model;
 
 /**
  * Statuts possibles d'un contrat (imposés par les consignes).

@@ -1,4 +1,4 @@
-package fr.malinassur.model;
+package fr.cytech.malinassur.model;
 
 import jakarta.persistence.*;
 
