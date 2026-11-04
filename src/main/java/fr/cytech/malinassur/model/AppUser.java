@@ -1,4 +1,4 @@
-package fr.cytech.assurance.model;
+package fr.cytech.malinassur.model;
 
 import jakarta.persistence.*;
 

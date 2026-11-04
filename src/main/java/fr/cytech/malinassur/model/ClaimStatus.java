@@ -1,4 +1,4 @@
-package fr.cytech.assurance.model;
+package fr.cytech.malinassur.model;
 
 /**
  * Statuts possibles d'un sinistre selon le cycle de vie métier.
