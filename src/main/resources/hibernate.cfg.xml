@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <!-- Paramètres JDBC (exemple avec PostgreSQL) -->
+        <property name="connection.driver_class">org.postgresql.Driver</property>
+        <property name="connection.url">jdbc:postgresql://localhost:5432/assurance_db</property>
+        <property name="connection.username">postgres</property>
+        <property name="connection.password">postgres</property>
+
+        <!-- Dialecte SQL -->
+        <property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+
+        <!-- Affichage des requêtes dans la console pour vérifier -->
+        <property name="show_sql">true</property>
+        <property name="format_sql">true</property>
+
+        <!-- Création / Mise à jour automatique des tables par Hibernate pour le dev -->
+        <property name="hbm2ddl.auto">update</property>
+
+        <!-- Enregistrement des entités gérées -->
+        <mapping class="fr.cytech.assurance.model.AppUser"/>
+        <mapping class="fr.cytech.assurance.model.Contract"/>
+        <mapping class="fr.cytech.assurance.model.Claim"/>
+        <mapping class="fr.cytech.assurance.model.SupportingDocument"/>
+    </session-factory>
+</hibernate-configuration>
