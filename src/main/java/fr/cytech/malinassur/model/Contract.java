@@ -5,8 +5,16 @@ import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
 import jakarta.persistence.*;
 
+/**
+ * Contrat d'assurance : relie UN client, UN type d'assurance et PLUSIEURS garanties.
+ *
+ * client_id et agent_id pointent vers app_user (table de la personne 1).
+ * On les garde en simples Long pour que notre module ne dépende pas de sa classe Java :
+ * chacun peut avancer de son côté. (La clé étrangère existe quand même en base.)
+ */
 @Entity
 @Table(name = "contract")
 public class Contract {
@@ -16,19 +24,17 @@ public class Contract {
     private Long id;
 
     @Column(name = "contract_number", nullable = false, unique = true)
-    private String contractNumber;
+    private String contractNumber;    // ex : "CTR-2026-000042"
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "client_id", nullable = false)
-    private AppUser client;
+    @Column(name = "client_id", nullable = false)
+    private Long clientId;
 
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     @JoinColumn(name = "insurance_type_id")
     private InsuranceType insuranceType;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "agent_id")
-    private AppUser agent;
+    @Column(name = "agent_id")        // nullable : assigné après création
+    private Long agentId;
 
     @Column(name = "start_date", nullable = false)
     private LocalDate startDate;
@@ -46,6 +52,7 @@ public class Contract {
     @Column(name = "created_at", nullable = false, updatable = false)
     private OffsetDateTime createdAt;
 
+    /** Les garanties choisies pour CE contrat (table contract_coverage). */
     @OneToMany(mappedBy = "contract", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<ContractCoverage> coverages = new ArrayList<>();
 
@@ -53,6 +60,8 @@ public class Contract {
     void onCreate() {
         if (createdAt == null) createdAt = OffsetDateTime.now();
     }
+
+    // ----- Méthodes métier simples (la logique complète est dans ContractService) -----
 
     public void addCoverage(Coverage coverage, BigDecimal appliedPremium) {
         coverages.add(new ContractCoverage(this, coverage, appliedPremium));
@@ -66,6 +75,7 @@ public class Contract {
         return coverages.stream().anyMatch(cc -> cc.getCoverage().getId().equals(coverageId));
     }
 
+    /** Prime = prix de base du type + somme des suppléments des garanties choisies. */
     public void recalculatePremium() {
         BigDecimal total = insuranceType.getBasePrice();
         for (ContractCoverage cc : coverages) {
@@ -74,23 +84,21 @@ public class Contract {
         this.premiumAmount = total;
     }
 
-    // Getters & Setters
+    // ----- Getters / Setters -----
     public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
     public String getContractNumber() { return contractNumber; }
     public void setContractNumber(String contractNumber) { this.contractNumber = contractNumber; }
-    public AppUser getClient() { return client; }
-    public void setClient(AppUser client) { this.client = client; }
+    public Long getClientId() { return clientId; }
+    public void setClientId(Long clientId) { this.clientId = clientId; }
     public InsuranceType getInsuranceType() { return insuranceType; }
     public void setInsuranceType(InsuranceType insuranceType) { this.insuranceType = insuranceType; }
-    public AppUser getAgent() { return agent; }
-    public void setAgent(AppUser agent) { this.agent = agent; }
+    public Long getAgentId() { return agentId; }
+    public void setAgentId(Long agentId) { this.agentId = agentId; }
     public LocalDate getStartDate() { return startDate; }
     public void setStartDate(LocalDate startDate) { this.startDate = startDate; }
     public LocalDate getEndDate() { return endDate; }
     public void setEndDate(LocalDate endDate) { this.endDate = endDate; }
     public BigDecimal getPremiumAmount() { return premiumAmount; }
-    public void setPremiumAmount(BigDecimal premiumAmount) { this.premiumAmount = premiumAmount; }
     public ContractStatus getStatus() { return status; }
     public void setStatus(ContractStatus status) { this.status = status; }
     public OffsetDateTime getCreatedAt() { return createdAt; }

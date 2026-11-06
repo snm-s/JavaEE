@@ -11,10 +11,10 @@ import java.util.stream.Collectors;
 import fr.cytech.malinassur.dao.ContractDao;
 import fr.cytech.malinassur.dao.InsuranceTypeDao;
 import fr.cytech.malinassur.exception.BusinessException;
-import fr.malinassur.model.Contract;
-import fr.malinassur.model.ContractStatus;
-import fr.malinassur.model.InsuranceType;
-import fr.malinassur.model.InsuranceTypeCoverage;
+import fr.cytech.malinassur.model.Contract;
+import fr.cytech.malinassur.model.ContractStatus;
+import fr.cytech.malinassur.model.InsuranceType;
+import fr.cytech.malinassur.model.InsuranceTypeCoverage;
 
 /**
  * Toute la LOGIQUE MÉTIER des contrats : création, calcul de prime, cycle de vie.

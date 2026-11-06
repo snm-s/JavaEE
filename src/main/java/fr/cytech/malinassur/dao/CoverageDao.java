@@ -2,7 +2,7 @@ package fr.cytech.malinassur.dao;
 
 import java.util.List;
 
-import fr.malinassur.model.Coverage;
+import fr.cytech.malinassur.model.Coverage;
 
 public class CoverageDao extends BaseDao<Coverage> {
 
