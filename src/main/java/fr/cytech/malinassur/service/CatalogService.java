@@ -6,9 +6,9 @@ import java.util.List;
 import fr.cytech.malinassur.dao.CoverageDao;
 import fr.cytech.malinassur.dao.InsuranceTypeDao;
 import fr.cytech.malinassur.exception.BusinessException;
-import fr.malinassur.model.Coverage;
-import fr.malinassur.model.InsuranceType;
-import fr.malinassur.model.InsuranceTypeCoverage;
+import fr.cytech.malinassur.model.Coverage;
+import fr.cytech.malinassur.model.InsuranceType;
+import fr.cytech.malinassur.model.InsuranceTypeCoverage;
 
 /**
  * Gestion du "catalogue" : types d'assurance + garanties + leurs liens.

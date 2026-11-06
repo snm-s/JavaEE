@@ -8,7 +8,7 @@ import java.util.function.Function;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import fr.malinassur.util.HibernateUtil;
+import fr.cytech.malinassur.util.HibernateUtil;
 
 /**
  * DAO générique : le CRUD écrit UNE fois pour toutes les entités (factorisation du code).

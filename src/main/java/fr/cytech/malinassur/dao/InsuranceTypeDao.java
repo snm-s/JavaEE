@@ -3,8 +3,8 @@ package fr.cytech.malinassur.dao;
 import java.util.List;
 import java.util.Optional;
 
-import fr.malinassur.model.InsuranceType;
-import fr.malinassur.model.InsuranceTypeCoverage;
+import fr.cytech.malinassur.model.InsuranceType;
+import fr.cytech.malinassur.model.InsuranceTypeCoverage;
 
 public class InsuranceTypeDao extends BaseDao<InsuranceType> {
 
@@ -49,7 +49,7 @@ public class InsuranceTypeDao extends BaseDao<InsuranceType> {
                 existing.setAdditionalPremium(additionalPremium);
             } else {
                 InsuranceType type = s.get(InsuranceType.class, typeId);
-                fr.malinassur.model.Coverage cov = s.get(fr.malinassur.model.Coverage.class, coverageId);
+                fr.cytech.malinassur.model.Coverage cov = s.get(fr.cytech.malinassur.model.Coverage.class, coverageId);
                 s.persist(new InsuranceTypeCoverage(type, cov, isDefault, additionalPremium));
             }
         });

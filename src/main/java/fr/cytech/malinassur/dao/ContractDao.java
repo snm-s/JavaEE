@@ -3,8 +3,8 @@ package fr.cytech.malinassur.dao;
 import java.time.LocalDate;
 import java.util.List;
 
-import fr.malinassur.model.Contract;
-import fr.malinassur.model.ContractStatus;
+import fr.cytech.malinassur.model.Contract;
+import fr.cytech.malinassur.model.ContractStatus;
 
 public class ContractDao extends BaseDao<Contract> {
 
