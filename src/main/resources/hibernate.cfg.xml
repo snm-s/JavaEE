@@ -4,11 +4,13 @@
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
+        <!-- Paramètres JDBC PostgreSQL -->
         <property name="connection.driver_class">org.postgresql.Driver</property>
         <property name="connection.url">jdbc:postgresql://localhost:5432/assurance_db</property>
         <property name="connection.username">postgres</property>
         <property name="connection.password">postgres</property>
 
+        <!-- Dialecte & Affichage SQL -->
         <property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property>
         <property name="show_sql">true</property>
         <property name="format_sql">true</property>
@@ -24,8 +26,9 @@
         <mapping class="fr.cytech.malinassur.model.Contract"/>
         <mapping class="fr.cytech.malinassur.model.ContractCoverage"/>
 
-        <!-- Module 2 : Sinistres -->
+        <!-- Module 2 : Sinistres & Paiements -->
         <mapping class="fr.cytech.malinassur.model.Claim"/>
         <mapping class="fr.cytech.malinassur.model.SupportingDocument"/>
+        <mapping class="fr.cytech.malinassur.model.Payment"/>
     </session-factory>
 </hibernate-configuration>
