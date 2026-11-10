@@ -147,3 +147,62 @@ h1, h2, h3 { font-family: var(--font-title); color: var(--bordeaux); margin: 0; 
 @media (max-width: 480px) {
   .card { padding: 30px 22px 26px; }
 }
+
+
+
+/* ==========================================
+   MALIN'ASSUR - NAVBAR
+   ========================================== */
+
+.app-navbar {
+    height: 75px;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    border-bottom: 1px solid var(--sage-light);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand-symbol {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    background: var(--bordeaux);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-title);
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.brand-name {
+    color: var(--bordeaux);
+    font-family: var(--font-title);
+    font-size: 27px;
+    font-weight: 700;
+}
+
+.navbar-label {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+@media (max-width: 600px) {
+    .app-navbar {
+        padding: 0 16px;
+    }
+
+    .navbar-label {
+        display: none;
+    }
+}
