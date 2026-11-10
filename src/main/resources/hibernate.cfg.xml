@@ -5,28 +5,32 @@
 <hibernate-configuration>
     <session-factory>
         <!-- Paramètres JDBC PostgreSQL -->
-        <property name="connection.driver_class">org.postgresql.Driver</property>
-        <property name="connection.url">jdbc:postgresql://localhost:5432/assurance_db</property>
-        <property name="connection.username">postgres</property>
-        <property name="connection.password">postgres</property>
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/malinassur_db</property>
+        <property name="hibernate.connection.username">postgres</property>
+        <property name="hibernate.connection.password">postgres</property>
 
-        <!-- Dialecte & Affichage SQL -->
-        <property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property>
-        <property name="show_sql">true</property>
-        <property name="format_sql">true</property>
-        <property name="hbm2ddl.auto">update</property>
+        <!-- Dialecte PostgreSQL -->
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
 
-        <!-- Socle & Utilisateurs -->
+        <!-- Affichage et formatage des requêtes SQL dans les logs -->
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.format_sql">true</property>
+
+        <!-- Validation automatique du schéma SQL par rapport aux entités -->
+        <property name="hibernate.hbm2ddl.auto">update</property>
+
+        <!-- ===== Socle Utilisateurs (Dev 1) ===== -->
         <mapping class="fr.cytech.malinassur.model.AppUser"/>
 
-        <!-- Module 1 : Types & Contrats -->
+        <!-- ===== Module Contrats & Produits (Dev 2) ===== -->
         <mapping class="fr.cytech.malinassur.model.InsuranceType"/>
         <mapping class="fr.cytech.malinassur.model.Coverage"/>
         <mapping class="fr.cytech.malinassur.model.InsuranceTypeCoverage"/>
         <mapping class="fr.cytech.malinassur.model.Contract"/>
         <mapping class="fr.cytech.malinassur.model.ContractCoverage"/>
 
-        <!-- Module 2 : Sinistres & Paiements -->
+        <!-- ===== Module Sinistres & Règlements (Dev 3) ===== -->
         <mapping class="fr.cytech.malinassur.model.Claim"/>
         <mapping class="fr.cytech.malinassur.model.SupportingDocument"/>
         <mapping class="fr.cytech.malinassur.model.Payment"/>

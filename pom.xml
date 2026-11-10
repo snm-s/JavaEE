@@ -60,6 +60,16 @@
     <build>
         <finalName>AssuranceApp</finalName>
         <plugins>
+            <!-- Configuration explicite du compilateur Java moderne -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+                <configuration>
+                    <release>21</release>
+                </configuration>
+            </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
@@ -98,4 +108,3 @@
         </plugins>
     </build>
 </project>
-
