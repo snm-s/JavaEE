@@ -62,7 +62,9 @@ public class PaymentService {
     public Payment payInstallment(Long paymentId, Long clientId, PaymentMethod method) {
         if (method == null) throw new BusinessException("Veuillez choisir un moyen de paiement.");
 
-        Payment payment = getById(paymentId);
+        // Modification ici : on utilise findWithContract() pour charger le contrat en même temps
+        Payment payment = paymentDao.findWithContract(paymentId)
+                .orElseThrow(() -> new BusinessException("Paiement introuvable."));
 
         // Si appelé par un client, vérifier que le contrat lui appartient
         if (clientId != null && !payment.getContract().getClientId().equals(clientId)) {

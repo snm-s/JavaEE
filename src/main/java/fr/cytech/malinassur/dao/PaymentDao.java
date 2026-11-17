@@ -25,6 +25,14 @@ public class PaymentDao extends BaseDao<Payment> {
                 .uniqueResultOptional());
     }
 
+    // <-- Ajout de la méthode pour charger le paiement avec son contrat (évite le LazyInitializationException)
+    public Optional<Payment> findWithContract(Long id) {
+        return read(session -> session.createQuery(
+                        "SELECT p FROM Payment p JOIN FETCH p.contract WHERE p.id = :id", Payment.class)
+                .setParameter("id", id)
+                .uniqueResultOptional());
+    }
+
     public List<Payment> findByContractId(Long contractId) {
         return read(session -> session.createQuery(
                         "SELECT p FROM Payment p JOIN FETCH p.contract WHERE p.contract.id = :contractId ORDER BY p.dueDate ASC", Payment.class)
