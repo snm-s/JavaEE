@@ -334,3 +334,143 @@ body:has(.app-layout) {
         min-height: auto;
     }
 }
+
+
+/* Page active dans la sidebar */
+.sidebar-link.active {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: white;
+    font-weight: 600;
+    border-left: 3px solid var(--gold);
+}
+
+
+/* ==========================================
+   PAGE MES CONTRATS
+   ========================================== */
+
+.contracts-header {
+    margin-bottom: 30px;
+}
+
+.contracts-header h1 {
+    color: var(--bordeaux);
+    margin-bottom: 8px;
+}
+
+.contracts-header p {
+    color: var(--muted);
+}
+
+.contracts-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.contract-card {
+    background: white;
+    padding: 24px;
+    border-radius: 14px;
+    border: 1px solid #eee5dc;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.contract-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.contract-icon {
+    background: #f9e9ed;
+    color: var(--bordeaux);
+    padding: 12px;
+    border-radius: 12px;
+    font-size: 24px;
+}
+
+.contract-card h2 {
+    color: var(--text);
+    font-size: 21px;
+    margin: 0;
+}
+
+.contract-number,
+.contract-date,
+.contract-premium {
+    color: var(--text);
+    margin: 0;
+}
+
+.contract-status {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    background: #eee;
+    color: #555;
+}
+
+.status-ACTIF {
+    background: #d8efdc;
+    color: #287a3c;
+}
+
+.status-EXPIRE {
+    background: #fff0c2;
+    color: #996000;
+}
+
+.status-EN_ATTENTE {
+    background: #fff0c2;
+    color: #996000;
+}
+
+.status-RESILIE {
+    background: #f8d7da;
+    color: #a12635;
+}
+
+.status-SUSPENDU {
+    background: #e5e7eb;
+    color: #4b5563;
+}
+
+.contract-details-btn {
+    display: block;
+    margin-top: auto;
+    padding: 12px;
+    background: var(--bordeaux);
+    color: white;
+    text-align: center;
+    border-radius: 7px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.contract-details-btn:hover {
+    background: var(--bordeaux-dark);
+    color: white;
+}
+
+.contracts-empty {
+    background: white;
+    padding: 45px 25px;
+    border-radius: 14px;
+    text-align: center;
+    border: 1px solid #eee5dc;
+}
+
+.contracts-empty h2 {
+    color: var(--bordeaux);
+}
+
+@media (max-width: 900px) {
+    .contracts-grid {
+        grid-template-columns: 1fr;
+    }
+}
