@@ -111,6 +111,16 @@ public class ContractService {
     public Contract suspend(Long id)   { return changeStatus(id, ContractStatus.SUSPENDU); }
     public Contract terminate(Long id) { return changeStatus(id, ContractStatus.RESILIE); }
 
+    /** Vrai si on peut passer de "from" à "to" (sert à afficher ou non les boutons). */
+    public boolean canChange(ContractStatus from, ContractStatus to) {
+        return TRANSITIONS.get(from).contains(to);
+    }
+
+    /** Vrai si le bouton "Renouveler" doit apparaître. */
+    public boolean canRenew(ContractStatus status) {
+        return status == ContractStatus.ACTIF || status == ContractStatus.EXPIRE;
+    }
+
     /** Renouvelle pour 12 mois à partir de la fin actuelle (ou d'aujourd'hui si déjà expiré). */
     public Contract renew(Long id) {
         Contract c = get(id);

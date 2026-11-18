@@ -17,8 +17,14 @@ public class CoverageDao extends BaseDao<Coverage> {
     }
 
     public boolean codeExists(String code, Long excludeId) {
+        if (excludeId == null) {
+            return read(s -> s.createQuery(
+                    "select count(c) from Coverage c where c.code = :code", Long.class)
+                    .setParameter("code", code)
+                    .uniqueResult() > 0);
+        }
         return read(s -> s.createQuery(
-                "select count(c) from Coverage c where c.code = :code and (:id is null or c.id <> :id)", Long.class)
+                "select count(c) from Coverage c where c.code = :code and c.id <> :id", Long.class)
                 .setParameter("code", code)
                 .setParameter("id", excludeId)
                 .uniqueResult() > 0);
