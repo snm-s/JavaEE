@@ -34,6 +34,11 @@ public class ClientClaimServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Long clientId = resolveClientId(req);
+        if (clientId == null) {
+            resp.sendRedirect(req.getContextPath() + "/login");
+            return;
+        }
+
         String action = req.getParameter("action");
         String idParam = req.getParameter("id");
 
@@ -104,12 +109,9 @@ public class ClientClaimServlet extends HttpServlet {
 
     private Long resolveClientId(HttpServletRequest req) {
         HttpSession session = req.getSession(false);
-        if (session != null) {
-            Object userObj = session.getAttribute("user");
-            if (userObj instanceof AppUser u) return u.getId();
-            Object idObj = session.getAttribute("userId");
-            if (idObj instanceof Long id) return id;
+        if (session != null && session.getAttribute("userId") instanceof Long userId) {
+            return userId;
         }
-        return 4L; // Claire Dupont (donnée de test) si session non encore branchée
+        return null;
     }
 }

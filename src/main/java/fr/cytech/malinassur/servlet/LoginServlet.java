@@ -56,9 +56,9 @@ public class LoginServlet extends HttpServlet {
 
     private void redirectByRole(AppUser user, HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String ctx = req.getContextPath();
-        if (user.getRole() == UserRole.AGENT) {
-            resp.sendRedirect(ctx + "/agent/claims");
-        } else if (user.getRole() == UserRole.ADMIN) {
+        if (user.getRole() == UserRole.ADMIN) {
+            resp.sendRedirect(ctx + "/admin/users");
+        } else if (user.getRole() == UserRole.AGENT) {
             resp.sendRedirect(ctx + "/agent/claims");
         } else {
             resp.sendRedirect(ctx + "/client/dashboard");
