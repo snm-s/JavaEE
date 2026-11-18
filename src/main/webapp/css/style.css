@@ -334,3 +334,372 @@ body:has(.app-layout) {
         min-height: auto;
     }
 }
+
+
+/* Page active dans la sidebar */
+.sidebar-link.active {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: white;
+    font-weight: 600;
+    border-left: 3px solid var(--gold);
+}
+
+
+/* ==========================================
+   PAGE MES CONTRATS
+   ========================================== */
+
+.contracts-header {
+    margin-bottom: 30px;
+}
+
+.contracts-header h1 {
+    color: var(--bordeaux);
+    margin-bottom: 8px;
+}
+
+.contracts-header p {
+    color: var(--muted);
+}
+
+.contracts-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.contract-card {
+    background: white;
+    padding: 24px;
+    border-radius: 14px;
+    border: 1px solid #eee5dc;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.contract-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.contract-icon {
+    background: #f9e9ed;
+    color: var(--bordeaux);
+    padding: 12px;
+    border-radius: 12px;
+    font-size: 24px;
+}
+
+.contract-card h2 {
+    color: var(--text);
+    font-size: 21px;
+    margin: 0;
+}
+
+.contract-number,
+.contract-date,
+.contract-premium {
+    color: var(--text);
+    margin: 0;
+}
+
+.contract-status {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    background: #eee;
+    color: #555;
+}
+
+.status-ACTIF {
+    background: #d8efdc;
+    color: #287a3c;
+}
+
+.status-EXPIRE {
+    background: #fff0c2;
+    color: #996000;
+}
+
+.status-EN_ATTENTE {
+    background: #fff0c2;
+    color: #996000;
+}
+
+.status-RESILIE {
+    background: #f8d7da;
+    color: #a12635;
+}
+
+.status-SUSPENDU {
+    background: #e5e7eb;
+    color: #4b5563;
+}
+
+.contract-details-btn {
+    display: block;
+    margin-top: auto;
+    padding: 12px;
+    background: var(--bordeaux);
+    color: white;
+    text-align: center;
+    border-radius: 7px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.contract-details-btn:hover {
+    background: var(--bordeaux-dark);
+    color: white;
+}
+
+.contracts-empty {
+    background: white;
+    padding: 45px 25px;
+    border-radius: 14px;
+    text-align: center;
+    border: 1px solid #eee5dc;
+}
+
+.contracts-empty h2 {
+    color: var(--bordeaux);
+}
+
+@media (max-width: 900px) {
+    .contracts-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+
+/* ===== PAGE D'ACCUEIL MALIN'ASSUR ===== */
+
+.home-page {
+    background: var(--cream) url('../img/background.jpg')
+                center top / cover no-repeat fixed;
+    color: var(--text);
+}
+
+.home-header {
+    min-height: 90px;
+    padding: 20px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+}
+
+.home-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font: 700 30px var(--font-title);
+    color: var(--bordeaux);
+}
+
+.home-brand-icon {
+    width: 43px;
+    height: 43px;
+    border-radius: 13px;
+    display: grid;
+    place-items: center;
+    color: white;
+    background: var(--bordeaux);
+}
+
+.home-nav {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.home-nav-login {
+    border: 1px solid var(--bordeaux);
+    border-radius: 30px;
+    padding: 12px 22px;
+    color: var(--bordeaux);
+}
+
+.home-hero {
+    min-height: min(740px, calc(100vh - 90px));
+    padding: 90px 9% 55px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+
+.home-hero-content {
+    max-width: 760px;
+}
+
+.home-eyebrow {
+    color: var(--sage-dark);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .23em;
+}
+
+.home-hero h1 {
+    margin: 27px 0;
+    font-size: clamp(55px, 6.5vw, 100px);
+    font-weight: 500;
+    line-height: 1.03;
+    letter-spacing: -.035em;
+}
+
+.home-hero h1 em {
+    font-weight: 400;
+    color: var(--sage-dark);
+}
+
+.home-hero-content > p {
+    max-width: 530px;
+    font-size: 16px;
+    line-height: 1.9;
+    color: var(--muted);
+}
+
+.home-actions {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 36px;
+}
+
+.home-primary-btn,
+.home-secondary-btn {
+    padding: 16px 27px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    transition: transform .2s, background .2s;
+}
+
+.home-primary-btn {
+    background: var(--bordeaux);
+    color: white;
+}
+
+.home-primary-btn:hover {
+    background: var(--bordeaux-dark);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.home-secondary-btn {
+    border: 1px solid rgba(107,30,46,.35);
+    color: var(--bordeaux);
+}
+
+.home-secondary-btn:hover {
+    transform: translateY(-2px);
+}
+
+.home-hero-signature {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 90px;
+    font: italic 19px var(--font-title);
+    color: var(--muted);
+}
+
+.home-signature-line {
+    width: 45px;
+    height: 1px;
+    background: var(--gold);
+}
+
+.home-section {
+    padding: 100px 9%;
+    background: rgba(248,245,234,.91);
+}
+
+.home-section-heading {
+    max-width: 650px;
+    margin-bottom: 50px;
+}
+
+.home-section h2,
+.home-bottom h2 {
+    font-size: clamp(40px, 4.5vw, 65px);
+    font-weight: 500;
+    margin: 16px 0;
+}
+
+.home-section-heading p,
+.home-bottom p {
+    color: var(--muted);
+    line-height: 1.8;
+}
+
+.home-offers {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0,1fr));
+    gap: 24px;
+}
+
+.home-offer {
+    min-height: 220px;
+    padding: 32px;
+    border: 1px solid rgba(107,30,46,.12);
+    border-radius: 12px;
+    background: rgba(255,255,255,.48);
+    transition: transform .25s, box-shadow .25s;
+}
+
+.home-offer:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(60,40,40,.07);
+}
+
+.home-offer-number {
+    font-size: 12px;
+    color: var(--gold);
+}
+
+.home-offer h3 {
+    font-size: 30px;
+    margin: 32px 0 10px;
+}
+
+.home-offer p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.home-bottom {
+    padding: 110px 9%;
+    text-align: center;
+    background: rgba(248,245,234,.72);
+}
+
+.home-footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 28px 7%;
+    font-size: 12px;
+    color: var(--muted);
+    background: var(--cream);
+}
+
+@media (max-width: 760px) {
+    .home-header { padding: 20px 5%; }
+    .home-brand { font-size: 25px; }
+    .home-nav { gap: 12px; }
+    .home-nav > a:not(.home-nav-login) { display: none; }
+    .home-hero { padding: 80px 6% 45px; }
+    .home-hero-signature { margin-top: 65px; }
+    .home-offers { grid-template-columns: 1fr; }
+    .home-section, .home-bottom { padding: 70px 6%; }
+}

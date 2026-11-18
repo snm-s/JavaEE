@@ -1,33 +1,74 @@
-<%-- Espace CLIENT : mes contrats  (servlet : ClientContractServlet, GET /client/contracts) --%>
-<%@ page pageEncoding="UTF-8" %>
+
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
-<%@ include file="/WEB-INF/views/includes/contracts/top.jsp" %>
-<c:set var="ctx" value="${pageContext.request.contextPath}"/>
 
-<div class="ct-page-head">
-    <div>
-        <h1>Mes contrats</h1>
-        <p class="ct-subtitle">Retrouvez vos assurances, leur statut et leur prime annuelle.</p>
-    </div>
+<jsp:include page="../includes/header.jsp" />
+<jsp:include page="../includes/navbar.jsp" />
+
+<div class="app-layout">
+    <jsp:include page="../includes/client/sidebar.jsp" />
+
+    <main class="app-main">
+        <div class="contracts-header">
+            <h1>Mes contrats</h1>
+            <p>Retrouvez et gérez vos contrats d'assurance.</p>
+        </div>
+
+        <c:choose>
+            <c:when test="${empty contracts}">
+                <div class="contracts-empty">
+                    <h2>Aucun contrat pour le moment</h2>
+                    <p>Vos contrats d'assurance apparaîtront ici.</p>
+                </div>
+            </c:when>
+
+            <c:otherwise>
+                <div class="contracts-grid">
+                    <c:forEach var="contract" items="${contracts}">
+                        <article class="contract-card">
+
+                            <div class="contract-card-top">
+                                <span class="contract-icon">◆</span>
+
+                                <span class="contract-status status-${contract.status}">
+                                    <c:choose>
+                                        <c:when test="${contract.status == 'ACTIF'}">Actif</c:when>
+                                        <c:when test="${contract.status == 'EN_ATTENTE'}">En attente</c:when>
+                                        <c:when test="${contract.status == 'EXPIRE'}">Expiré</c:when>
+                                        <c:when test="${contract.status == 'RESILIE'}">Résilié</c:when>
+                                        <c:when test="${contract.status == 'SUSPENDU'}">Suspendu</c:when>
+                                        <c:otherwise>${contract.status}</c:otherwise>
+                                    </c:choose>
+                                </span>
+
+                            </div>
+
+                            <h2>${contract.insuranceType.name}</h2>
+
+                            <p class="contract-number">
+                                Contrat n° ${contract.contractNumber}
+                            </p>
+
+                            <p class="contract-date">
+                                Échéance : ${contract.endDate}
+                            </p>
+
+                            <p class="contract-premium">
+                                Prime : ${contract.premiumAmount} €
+                            </p>
+
+                            <a class="contract-details-btn"
+
+                              href="${pageContext.request.contextPath}/client/contracts/details?id=${contract.id}">
+                                Voir les détails →
+                            </a>
+
+                        </article>
+                    </c:forEach>
+                </div>
+            </c:otherwise>
+        </c:choose>
+    </main>
 </div>
 
-<div class="ct-cards">
-    <c:forEach var="ct" items="${contracts}">
-        <article class="ct-card">
-            <div class="ct-actions" style="justify-content:space-between">
-                <span class="ct-meta">${ct.contractNumber}</span>
-                <c:set var="st" value="${ct.status}"/><%@ include file="/WEB-INF/views/includes/contracts/status-badge.jsp" %>
-            </div>
-            <h3><c:out value="${ct.insuranceType.name}"/></h3>
-            <div class="ct-meta">Du ${ct.startDate} au ${ct.endDate}</div>
-            <div class="ct-meta">${ct.coverages.size()} garantie(s)</div>
-            <div class="ct-price">${ct.premiumAmount} € <small style="font-size:.9rem">/ an</small></div>
-            <a href="${ctx}/client/contracts/details?id=${ct.id}" class="ct-btn ct-btn-light">Voir le détail</a>
-        </article>
-    </c:forEach>
-</div>
-<c:if test="${empty contracts}">
-    <section class="ct-panel ct-empty">Vous n'avez pas encore de contrat. Contactez votre agent pour souscrire.</section>
-</c:if>
-
-<%@ include file="/WEB-INF/views/includes/contracts/bottom.jsp" %>
+<jsp:include page="../includes/footer.jsp" />
