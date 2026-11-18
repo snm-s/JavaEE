@@ -1,13 +1,13 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+java -ver<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Connexion – Malin’Assur</title>
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 </head>
 <body>
   <main class="center-page">
@@ -51,7 +51,7 @@
       </form>
 
       <div class="divider">◆</div>
-      <p class="card-footer">Pas encore de compte ? <a href="${pageContext.request.contextPath}/register.jsp">Créer un compte</a></p>
+      <p class="card-footer">Pas encore de compte ? <a href="${pageContext.request.contextPath}/register">Créer un compte</a></p>
     </section>
   </main>
 
