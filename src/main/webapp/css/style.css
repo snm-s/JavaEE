@@ -1,0 +1,738 @@
+@charset "UTF-8";
+/* ==========================================================
+   Malin'Assur – feuille de style globale
+   Chargée sur TOUTES les pages (fond, couleurs, boutons...)
+   ========================================================== */
+
+:root {
+  --bordeaux:       #6b1e2e;
+  --bordeaux-dark:  #541723;
+  --sage:           #7d9577;
+  --sage-dark:      #4f6b4c;
+  --sage-light:     #dfe5d8;
+  --gold:           #b8923a;
+  --cream:          #f8f5ea;
+  --text:           #2f2a2b;
+  --muted:          #7a7468;
+  --error:          #a3202f;
+
+  --font-title: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-body:  'Inter', 'Segoe UI', Roboto, Arial, sans-serif;
+  --radius:     14px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body { height: 100%; margin: 0; }
+
+/* Fond commun à tout le site */
+body {
+  font-family: var(--font-body);
+  color: var(--text);
+  background: var(--cream) url('../img/background.jpg') center / cover no-repeat fixed;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--sage-dark); text-decoration: none; transition: color .2s; }
+a:hover { color: var(--bordeaux); }
+
+h1, h2, h3 { font-family: var(--font-title); color: var(--bordeaux); margin: 0; }
+
+/* ---------- Mise en page centrée (login, inscription...) ---------- */
+.center-page {
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 16px;
+}
+
+/* ---------- Carte ---------- */
+.card {
+  width: 100%;
+  max-width: 430px;
+  background: rgba(255, 255, 255, .72);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(184, 146, 58, .35);   /* fin liseré doré */
+  border-radius: var(--radius);
+  padding: 40px 38px 34px;
+  box-shadow: 0 18px 50px rgba(79, 107, 76, .18);
+}
+
+.card .logo { display: block; width: 210px; max-width: 70%; margin: 0 auto 20px; }
+
+.card h1 { text-align: center; font-size: 2rem; font-weight: 600; margin-top: 6px; }
+
+.card .subtitle {
+  text-align: center; color: var(--muted); font-size: .92rem;
+  margin: 6px 0 26px;
+}
+
+/* ---------- Formulaires ---------- */
+.field { margin-bottom: 18px; }
+
+.field label {
+  display: block; font-size: .8rem; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--sage-dark); margin-bottom: 6px;
+}
+
+.input-wrap { position: relative; }
+
+.field input {
+  width: 100%;
+  padding: 12px 14px;
+  font: inherit; color: var(--text);
+  background: rgba(255, 255, 255, .85);
+  border: 1px solid var(--sage-light);
+  border-radius: 10px;
+  outline: none;
+  transition: border-color .2s, box-shadow .2s;
+}
+.field input::placeholder { color: #aaa699; }
+.field input:focus {
+  border-color: var(--sage);
+  box-shadow: 0 0 0 3px rgba(125, 149, 119, .22);
+}
+.field.invalid input { border-color: var(--error); }
+.field .error-text { color: var(--error); font-size: .78rem; margin-top: 5px; display: none; }
+.field.invalid .error-text { display: block; }
+
+.toggle-pwd {
+  position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+  background: none; border: 0; cursor: pointer;
+  color: var(--sage-dark); font-size: .78rem; padding: 4px 6px;
+}
+.toggle-pwd:hover { color: var(--bordeaux); }
+
+.row-between {
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: .85rem; margin: -4px 0 22px;
+}
+.remember { display: flex; align-items: center; gap: 7px; color: var(--muted); cursor: pointer; }
+.remember input { accent-color: var(--bordeaux); }
+
+/* ---------- Boutons ---------- */
+.btn {
+  display: block; width: 100%;
+  padding: 13px 18px;
+  font: 600 .95rem var(--font-body); letter-spacing: .04em;
+  color: #fff; background: var(--bordeaux);
+  border: 0; border-radius: 10px; cursor: pointer;
+  transition: background .2s, transform .1s, box-shadow .2s;
+}
+.btn:hover  { background: var(--bordeaux-dark); box-shadow: 0 6px 16px rgba(107, 30, 46, .28); }
+.btn:active { transform: translateY(1px); }
+
+/* ---------- Messages ---------- */
+.alert {
+  padding: 11px 14px; border-radius: 10px; font-size: .88rem; margin-bottom: 18px;
+}
+.alert-error   { background: #f8e4e6; color: var(--error);     border: 1px solid #ecc3c8; }
+.alert-success { background: #e6eee2; color: var(--sage-dark); border: 1px solid #cddbc6; }
+
+/* ---------- Séparateur doré + pied de carte ---------- */
+.divider {
+  display: flex; align-items: center; gap: 12px; margin: 24px 0 18px;
+  color: var(--gold); font-size: .75rem;
+}
+.divider::before, .divider::after {
+  content: ""; flex: 1; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+
+.card-footer { text-align: center; font-size: .9rem; color: var(--muted); }
+.card-footer a { font-weight: 600; }
+
+@media (max-width: 480px) {
+  .card { padding: 30px 22px 26px; }
+}
+
+
+
+/* ==========================================
+   MALIN'ASSUR - NAVBAR
+   ========================================== */
+
+.app-navbar {
+    height: 75px;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    border-bottom: 1px solid var(--sage-light);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand-symbol {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    background: var(--bordeaux);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-title);
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.brand-name {
+    color: var(--bordeaux);
+    font-family: var(--font-title);
+    font-size: 27px;
+    font-weight: 700;
+}
+
+.navbar-label {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.navbar-user {
+    color: var(--bordeaux);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.navbar-logout {
+    color: var(--muted);
+    font-size: 13px;
+    text-decoration: none;
+    border: 1px solid var(--sage-light);
+    padding: 6px 12px;
+    border-radius: 999px;
+    transition: color .2s, border-color .2s;
+}
+
+.navbar-logout:hover {
+    color: var(--bordeaux);
+    border-color: var(--bordeaux);
+}
+
+.field-hint {
+    color: var(--muted);
+    font-size: .78rem;
+    margin: -8px 0 14px;
+}
+
+@media (max-width: 600px) {
+    .app-navbar {
+        padding: 0 16px;
+    }
+
+    .navbar-label {
+        display: none;
+    }
+}
+
+
+/* ==========================================
+   MALIN'ASSUR - FOOTER
+   ========================================== */
+
+.app-footer {
+    background-color: #ffffff;
+    border-top: 1px solid var(--sage-light);
+    padding: 20px 30px;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.footer-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.app-footer p {
+    margin: 0;
+}
+
+.footer-slogan {
+    color: var(--bordeaux);
+    font-style: italic;
+}
+
+@media (max-width: 600px) {
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+
+.app-layout {
+    display: flex;
+    min-height: calc(100vh - 75px);
+}
+
+.app-main {
+    flex: 1;
+    min-width: 0;
+    padding: 35px;
+    background: var(--cream);
+}
+
+@media (max-width: 768px) {
+    .app-layout {
+        flex-direction: column;
+    }
+}
+
+/* ==========================================
+   MALIN'ASSUR - SIDEBAR CLIENT
+   ========================================== */
+
+.client-sidebar {
+    width: 250px;
+    min-height: calc(100vh - 75px);
+    background: var(--bordeaux);
+    color: white;
+    padding: 28px 16px;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+}
+
+.sidebar-heading {
+    padding: 8px 14px 22px;
+}
+
+.sidebar-section-title {
+    color: #e4c9ce;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+.sidebar-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.sidebar-link {
+    display: block;
+    padding: 13px 15px;
+    border-radius: 9px;
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background 0.2s ease;
+}
+
+.sidebar-link:hover,
+.sidebar-link:focus-visible {
+    background: #873c4b;
+    color: white;
+}
+
+.sidebar-bottom {
+    margin-top: auto;
+    padding-top: 35px;
+}
+
+/* ==========================================
+   FOND DES PAGES DASHBOARD
+   ========================================== */
+
+body:has(.app-layout) {
+    background: var(--cream);
+    background-image: none;
+}
+
+/* ==========================================
+   RESPONSIVE SIDEBAR
+   ========================================== */
+
+@media (max-width: 768px) {
+    .client-sidebar {
+        width: 100%;
+        min-height: auto;
+    }
+}
+
+
+/* Page active dans la sidebar */
+.sidebar-link.active {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: white;
+    font-weight: 600;
+    border-left: 3px solid var(--gold);
+}
+
+
+/* ==========================================
+   PAGE MES CONTRATS
+   ========================================== */
+
+.contracts-header {
+    margin-bottom: 30px;
+}
+
+.contracts-header h1 {
+    color: var(--bordeaux);
+    margin-bottom: 8px;
+}
+
+.contracts-header p {
+    color: var(--muted);
+}
+
+.contracts-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.contract-card {
+    background: white;
+    padding: 24px;
+    border-radius: 14px;
+    border: 1px solid #eee5dc;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.contract-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.contract-icon {
+    background: #f9e9ed;
+    color: var(--bordeaux);
+    padding: 12px;
+    border-radius: 12px;
+    font-size: 24px;
+}
+
+.contract-card h2 {
+    color: var(--text);
+    font-size: 21px;
+    margin: 0;
+}
+
+.contract-number,
+.contract-date,
+.contract-premium {
+    color: var(--text);
+    margin: 0;
+}
+
+.contract-status {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    background: #eee;
+    color: #555;
+}
+
+.status-ACTIF {
+    background: #d8efdc;
+    color: #287a3c;
+}
+
+.status-EXPIRE {
+    background: #fff0c2;
+    color: #996000;
+}
+
+.status-EN_ATTENTE {
+    background: #fff0c2;
+    color: #996000;
+}
+
+.status-RESILIE {
+    background: #f8d7da;
+    color: #a12635;
+}
+
+.status-SUSPENDU {
+    background: #e5e7eb;
+    color: #4b5563;
+}
+
+.contract-details-btn {
+    display: block;
+    margin-top: auto;
+    padding: 12px;
+    background: var(--bordeaux);
+    color: white;
+    text-align: center;
+    border-radius: 7px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.contract-details-btn:hover {
+    background: var(--bordeaux-dark);
+    color: white;
+}
+
+.contracts-empty {
+    background: white;
+    padding: 45px 25px;
+    border-radius: 14px;
+    text-align: center;
+    border: 1px solid #eee5dc;
+}
+
+.contracts-empty h2 {
+    color: var(--bordeaux);
+}
+
+@media (max-width: 900px) {
+    .contracts-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+
+/* ===== PAGE D'ACCUEIL MALIN'ASSUR ===== */
+
+.home-page {
+    background: var(--cream) url('../img/background.jpg')
+                center top / cover no-repeat fixed;
+    color: var(--text);
+}
+
+.home-header {
+    min-height: 90px;
+    padding: 20px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+}
+
+.home-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font: 700 30px var(--font-title);
+    color: var(--bordeaux);
+}
+
+.home-brand-icon {
+    width: 43px;
+    height: 43px;
+    border-radius: 13px;
+    display: grid;
+    place-items: center;
+    color: white;
+    background: var(--bordeaux);
+}
+
+.home-nav {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.home-nav-login {
+    border: 1px solid var(--bordeaux);
+    border-radius: 30px;
+    padding: 12px 22px;
+    color: var(--bordeaux);
+}
+
+.home-hero {
+    min-height: min(740px, calc(100vh - 90px));
+    padding: 90px 9% 55px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+
+.home-hero-content {
+    max-width: 760px;
+}
+
+.home-eyebrow {
+    color: var(--sage-dark);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .23em;
+}
+
+.home-hero h1 {
+    margin: 27px 0;
+    font-size: clamp(55px, 6.5vw, 100px);
+    font-weight: 500;
+    line-height: 1.03;
+    letter-spacing: -.035em;
+}
+
+.home-hero h1 em {
+    font-weight: 400;
+    color: var(--sage-dark);
+}
+
+.home-hero-content > p {
+    max-width: 530px;
+    font-size: 16px;
+    line-height: 1.9;
+    color: var(--muted);
+}
+
+.home-actions {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 36px;
+}
+
+.home-primary-btn,
+.home-secondary-btn {
+    padding: 16px 27px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    transition: transform .2s, background .2s;
+}
+
+.home-primary-btn {
+    background: var(--bordeaux);
+    color: white;
+}
+
+.home-primary-btn:hover {
+    background: var(--bordeaux-dark);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.home-secondary-btn {
+    border: 1px solid rgba(107,30,46,.35);
+    color: var(--bordeaux);
+}
+
+.home-secondary-btn:hover {
+    transform: translateY(-2px);
+}
+
+.home-hero-signature {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 90px;
+    font: italic 19px var(--font-title);
+    color: var(--muted);
+}
+
+.home-signature-line {
+    width: 45px;
+    height: 1px;
+    background: var(--gold);
+}
+
+.home-section {
+    padding: 100px 9%;
+    background: rgba(248,245,234,.91);
+}
+
+.home-section-heading {
+    max-width: 650px;
+    margin-bottom: 50px;
+}
+
+.home-section h2,
+.home-bottom h2 {
+    font-size: clamp(40px, 4.5vw, 65px);
+    font-weight: 500;
+    margin: 16px 0;
+}
+
+.home-section-heading p,
+.home-bottom p {
+    color: var(--muted);
+    line-height: 1.8;
+}
+
+.home-offers {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0,1fr));
+    gap: 24px;
+}
+
+.home-offer {
+    min-height: 220px;
+    padding: 32px;
+    border: 1px solid rgba(107,30,46,.12);
+    border-radius: 12px;
+    background: rgba(255,255,255,.48);
+    transition: transform .25s, box-shadow .25s;
+}
+
+.home-offer:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(60,40,40,.07);
+}
+
+.home-offer-number {
+    font-size: 12px;
+    color: var(--gold);
+}
+
+.home-offer h3 {
+    font-size: 30px;
+    margin: 32px 0 10px;
+}
+
+.home-offer p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.home-bottom {
+    padding: 110px 9%;
+    text-align: center;
+    background: rgba(248,245,234,.72);
+}
+
+.home-footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 28px 7%;
+    font-size: 12px;
+    color: var(--muted);
+    background: var(--cream);
+}
+
+@media (max-width: 760px) {
+    .home-header { padding: 20px 5%; }
+    .home-brand { font-size: 25px; }
+    .home-nav { gap: 12px; }
+    .home-nav > a:not(.home-nav-login) { display: none; }
+    .home-hero { padding: 80px 6% 45px; }
+    .home-hero-signature { margin-top: 65px; }
+    .home-offers { grid-template-columns: 1fr; }
+    .home-section, .home-bottom { padding: 70px 6%; }
+}
