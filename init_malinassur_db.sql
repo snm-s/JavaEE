@@ -141,13 +141,13 @@ CREATE INDEX idx_payment_status   ON payment(status);
 -- =====================================================================
 
 -- Utilisateurs (mot de passe initial pour tous : 'password123' ou hash BCrypt)
--- Hash BCrypt valide pour 'password123' : $2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy
+-- Hash BCrypt valide pour 'password123' : $2a$10$95OH7KWpN6KlNOUa2ETfWuBkpwLHcC71ZR1Ng3N29dXjIeYPP3KgC
 INSERT INTO app_user (first_name, last_name, email, password_hash, role) VALUES
-                                                                             ('Admin', 'System', 'admin@malinassur.fr', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', 'ADMIN'),
-                                                                             ('Marc', 'Martin', 'agent.martin@malinassur.fr', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', 'AGENT'),
-                                                                             ('Sophie', 'Bernard', 'agent.bernard@malinassur.fr', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', 'AGENT'),
-                                                                             ('Claire', 'Dupont', 'claire.dupont@client.fr', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', 'CLIENT'),
-                                                                             ('Thomas', 'Leroy', 'thomas.leroy@client.fr', '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy', 'CLIENT');
+                                                                             ('Admin', 'System', 'admin@malinassur.fr', '$2a$10$95OH7KWpN6KlNOUa2ETfWuBkpwLHcC71ZR1Ng3N29dXjIeYPP3KgC', 'ADMIN'),
+                                                                             ('Marc', 'Martin', 'agent.martin@malinassur.fr', '$2a$10$95OH7KWpN6KlNOUa2ETfWuBkpwLHcC71ZR1Ng3N29dXjIeYPP3KgC', 'AGENT'),
+                                                                             ('Sophie', 'Bernard', 'agent.bernard@malinassur.fr', '$2a$10$95OH7KWpN6KlNOUa2ETfWuBkpwLHcC71ZR1Ng3N29dXjIeYPP3KgC', 'AGENT'),
+                                                                             ('Claire', 'Dupont', 'claire.dupont@client.fr', '$2a$10$95OH7KWpN6KlNOUa2ETfWuBkpwLHcC71ZR1Ng3N29dXjIeYPP3KgC', 'CLIENT'),
+                                                                             ('Thomas', 'Leroy', 'thomas.leroy@client.fr', '$2a$10$95OH7KWpN6KlNOUa2ETfWuBkpwLHcC71ZR1Ng3N29dXjIeYPP3KgC', 'CLIENT');
 
 -- Types d'assurance
 INSERT INTO insurance_type (code, name, description, base_price) VALUES
