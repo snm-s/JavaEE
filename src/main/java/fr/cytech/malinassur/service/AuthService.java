@@ -4,6 +4,9 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HexFormat;
+import java.util.List;
+
+import org.mindrot.jbcrypt.BCrypt;
 
 import fr.cytech.malinassur.dao.AppUserDao;
 import fr.cytech.malinassur.exception.BusinessException;
@@ -14,7 +17,7 @@ public class AuthService {
 
     private final AppUserDao userDao = new AppUserDao();
 
-    /** Inscrit un nouvel utilisateur avec le rôle CLIENT. */
+    /** Inscrit un nouvel utilisateur avec le rôle CLIENT (hash BCrypt). */
     public AppUser registerClient(String firstName, String lastName, String email, String rawPassword, String confirmPassword) {
         if (firstName == null || firstName.isBlank()) {
             throw new BusinessException("Le prénom est obligatoire.");
@@ -45,7 +48,7 @@ public class AuthService {
         return userDao.save(user);
     }
 
-    /** Authentifie un utilisateur via son e-mail et son mot de passe. */
+    /** Authentifie un utilisateur via BCrypt (avec repli rétrocompatible). */
     public AppUser authenticate(String email, String rawPassword) {
         if (email == null || email.isBlank() || rawPassword == null || rawPassword.isBlank()) {
             throw new BusinessException("Veuillez renseigner votre e-mail et votre mot de passe.");
@@ -58,24 +61,31 @@ public class AuthService {
             throw new BusinessException("Ce compte est désactivé. Contactez un administrateur.");
         }
 
-        String hashedInput = hashPassword(rawPassword);
-        boolean matchesHash = user.getPasswordHash().equalsIgnoreCase(hashedInput);
-        boolean matchesPlainDemo = user.getPasswordHash().equals(rawPassword);
+        String storedHash = user.getPasswordHash();
+        boolean authenticated = false;
 
-        if (!matchesHash && !matchesPlainDemo) {
-            throw new BusinessException("Identifiants incorrects.");
+        if (storedHash != null && storedHash.startsWith("$2")) {
+            // Vérification BCrypt standard ($2a$, $2b$, $2y$)
+            authenticated = BCrypt.checkpw(rawPassword, storedHash);
+        } else if (storedHash != null && (storedHash.equals(rawPassword) || storedHash.equalsIgnoreCase(sha256(rawPassword)))) {
+            // Rétrocompatibilité si un ancien compte était en clair ou SHA-256
+            authenticated = true;
+            user.setPasswordHash(hashPassword(rawPassword));
+            user = userDao.update(user);
         }
 
-        // Migration silencieuse si le mot de passe en base était en clair (données SQL de démo)
-        if (matchesPlainDemo && !matchesHash) {
-            user.setPasswordHash(hashedInput);
-            user = userDao.update(user);
+        if (!authenticated) {
+            throw new BusinessException("Identifiants incorrects.");
         }
 
         return user;
     }
 
     public static String hashPassword(String rawPassword) {
+        return BCrypt.hashpw(rawPassword, BCrypt.gensalt(10));
+    }
+
+    private static String sha256(String rawPassword) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] hash = digest.digest(rawPassword.getBytes(StandardCharsets.UTF_8));
@@ -83,5 +93,30 @@ public class AuthService {
         } catch (NoSuchAlgorithmException e) {
             throw new IllegalStateException("Algorithme SHA-256 indisponible", e);
         }
+    }
+
+    // --- Méthodes d'administration si utilisées par AdminUserServlet ---
+    public List<AppUser> findAllUsers() {
+        return userDao.findAll();
+    }
+
+    public void updateUserRole(Long targetUserId, UserRole newRole, Long currentAdminId) {
+        if (targetUserId.equals(currentAdminId)) {
+            throw new BusinessException("Vous ne pouvez pas modifier votre propre rôle.");
+        }
+        AppUser user = userDao.findById(targetUserId)
+                .orElseThrow(() -> new BusinessException("Utilisateur introuvable."));
+        user.setRole(newRole);
+        userDao.update(user);
+    }
+
+    public void toggleUserStatus(Long targetUserId, Long currentAdminId) {
+        if (targetUserId.equals(currentAdminId)) {
+            throw new BusinessException("Vous ne pouvez pas désactiver votre propre compte.");
+        }
+        AppUser user = userDao.findById(targetUserId)
+                .orElseThrow(() -> new BusinessException("Utilisateur introuvable."));
+        user.setActive(!user.isActive());
+        userDao.update(user);
     }
 }
